@@ -1,4 +1,5 @@
-# Demo Spring and ChatGPT
+# Demo Spring and ChatGPT 
+![bot.png](img%2Fbot.png)
 ChatGPT is a powerful language model developed by OpenAI that can be used to generate human-like text. 
 The OpenAI API allows developers to access the model and use it in their own applications. 
 
