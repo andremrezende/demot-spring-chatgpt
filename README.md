@@ -23,7 +23,7 @@ http://localhost:8080/generateImages
     "prompt": "A cyte baby takung sumbath",
     "n": 3
 }
-```
+``
 
 You can see the Json request body with value for prompt and n. n=3 means that we would receive 5 generated images in response. And we do receive 3 image URLs related to the prompt text that we just sent.
 

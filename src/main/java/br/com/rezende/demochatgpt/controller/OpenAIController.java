@@ -1,5 +1,7 @@
 package br.com.rezende.demochatgpt.controller;
 
+import br.com.rezende.demochatgpt.model.CreateSQLQueryRequest;
+import br.com.rezende.demochatgpt.model.DBName;
 import br.com.rezende.demochatgpt.model.GenerateImagesRequest;
 import br.com.rezende.demochatgpt.util.OpenAIGenerator;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,13 @@ public class OpenAIController {
     @PostMapping("/generateImages")
     public String generateImages(@RequestBody GenerateImagesRequest request)
     {
-        return openAIGenerator.generateImages(request.getPrompt(), request.getTemperature(), request.getMaxTokens(), request.getStop(),
-                request.getLogprobs(), request.isEcho(), request.getN());
+        return openAIGenerator.generateImages(request.prompt(), request.temperature(), request.maxTokens(), request.stop(),
+                request.logprobs(), request.echo(), request.n());
+    }
+
+    @PostMapping("/createQuery")
+    public String createQuery(@RequestBody CreateSQLQueryRequest request)
+    {
+        return openAIGenerator.createSQLQuery(request.sentence(), DBName.MYSQL);
     }
 }
