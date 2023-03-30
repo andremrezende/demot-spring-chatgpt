@@ -19,28 +19,6 @@ public class OpenAIGenerator {
     private String apiKey;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    /**
-     *
-     * @param prompt
-     * @param temperature
-     * @param maxTokens
-     * @param stop
-     * @param logprobs
-     * @param echo
-     * @param n
-     * @return
-     */
-    public String generateImages(String prompt, float temperature, int maxTokens, String stop, final int logprobs, final boolean echo, int n)
-    {
-        HttpHeaders headers = getHttpHeaders();
-
-        // We are including only some of the parameters to the json request
-        String requestJson = "{\"prompt\":\"" + prompt + "\",\"n\":" + n + "}";
-
-        HttpEntity<String> request = new HttpEntity<>(requestJson, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(HTTPS_API_OPENAI_COM_V_1_IMG_GENERATIONS, request, String.class);
-        return response.getBody();
-    }
 
     /**
      * SQL generation using OpenAI APIs can also be used to improve the accuracy of data extraction processes.
@@ -57,14 +35,26 @@ public class OpenAIGenerator {
     }
 
     /**
-     * Default OpenAI GPT API Http Headers.
-     * @return Header types and client authorization API.
+     *
+     * @param prompt
+     * @param temperature
+     * @param maxTokens
+     * @param stop
+     * @param logprobs
+     * @param echo
+     * @param n
+     * @return
      */
-    private HttpHeaders getHttpHeaders() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + apiKey);
-        return headers;
+    public String generateImages(String prompt, float temperature, int maxTokens, String stop, final int logprobs, final boolean echo, int n)
+    {
+        HttpHeaders headers = GPTHeaders.getHttpHeaders(this.apiKey);
+
+        // We are including only some of the parameters to the json request
+        String requestJson = "{\"prompt\":\"" + prompt + "\",\"n\":" + n + "}";
+
+        HttpEntity<String> request = new HttpEntity<>(requestJson, headers);
+        ResponseEntity<String> response = restTemplate.postForEntity(HTTPS_API_OPENAI_COM_V_1_IMG_GENERATIONS, request, String.class);
+        return response.getBody();
     }
 
 }
